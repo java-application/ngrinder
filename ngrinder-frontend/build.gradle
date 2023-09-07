@@ -1,0 +1,16 @@
+plugins {
+    id "com.github.node-gradle.node" version "3.3.0"
+}
+
+node {
+    version = "16.15.1"
+    // Enabled the automatic download. False is the default (for now).
+    download = true
+}
+
+task webpack(dependsOn: "npmInstall", type: NodeTask) {
+    script = file("node_modules/webpack/bin/webpack.js")
+    if (profile) {
+        args = ["--$profile"]
+    }
+}
